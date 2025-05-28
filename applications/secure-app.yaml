@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: secure-app
+  namespace: argocd
+spec:
+  project: secure
+  source:
+    repoURL: https://github.com/rcorderoayigroup/argo-demo.git
+    targetRevision: main
+    path: secure-app
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: secure-ns
+  syncPolicy:
+    automated: null
+    syncOptions:
+      - CreateNamespace=true
