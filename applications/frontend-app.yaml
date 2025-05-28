@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: demo-frontend
+  namespace: argocd
+spec:
+  project: demo
+  source:
+    repoURL: https://github.com/<TU-USUARIO>/argo-demo.git
+    targetRevision: main
+    path: apps/frontend
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
